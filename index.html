@@ -58,6 +58,16 @@
 			<section>
 				<section>
 					<h1>Motivation</h1>
+
+					<aside class="notes">
+						<h3> Why do we write unit test?</h3>
+						<ul>
+							<li>Because we want our code to work</li>
+							<li>Because we want our code to
+								<b>keep</b> working</li>
+							<li>Because we want to develop faster with more confidence and fewer regressions</li>
+						</ul>
+					</aside>
 				</section>
 
 				<section>
@@ -102,12 +112,7 @@
 
 				<section>
 					<h3>The test world</h3>
-					<!-- Add unit level, component, integration... -->
 					<img height="450" width="450" data-src="images/testing_pyramid.jpg">
-
-					<aside class="notes">
-						* jksdhf * ksjdhf
-					</aside>
 				</section>
 
 				<section>
@@ -148,6 +153,11 @@
 							<td>Classes, functions</td>
 						</tr>
 					</table>
+
+					<aside class="notes">
+						A unit test tests only <b>one</b> single unit - typically a class.
+						Each test case tests only <b>one</b> single use-case.
+					</aside>
 				</section>
 
 				<section>
@@ -175,7 +185,7 @@
 					<h3>Fast</h3>
 					<ul>
 						<li>Milliseconds</li>
-						<li>No IO, DB, web client...</li>
+						<li>No IO, databases, network access</li>
 						<li>No time consuming processing</li>
 						<li>You should never hesitate to execute unit tests</li>
 					</ul>
@@ -186,7 +196,7 @@
 					<ul>
 						<li>Only execute code in the unit under test</li>
 						<li>Mock external dependencies (Workshop #3)</li>
-						<li>Independent of tests order execution</li>
+						<li>Tests can run in any order</li>
 						<li>Executing any test always produces the same result</li>
 					</ul>
 				</section>
@@ -197,6 +207,7 @@
 						<li>Deterministic result</li>
 						<li>Independent of environement (timezone, locale, line endings...)</li>
 						<li>Each test should setup/arrange it's own data</li>
+						<li>Avoid flakiness as best as you can</li>
 					</ul>
 				</section>
 
@@ -226,7 +237,9 @@
 				<section>
 					<h3>Best practices</h3>
 					<ul>
-						<li>Test class name should be named <code><b>[TestedClass]</b>Tests</code></li>
+						<li>Test class name should be named
+							<code><b>[TestedClass]</b>Tests</code>
+						</li>
 						<li>Test method name should follow GivenWhenThen pattern</li>
 						<li>Test method should follow arrange-act-assert</li>
 					</ul>
