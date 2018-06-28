@@ -1,0 +1,323 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Introduction to Unit Testing</h1>
+				<p>
+					<small>Organized for developers by developers</small>
+				</p>
+			</section>
+
+			<section>
+				<h2>Plan</h2>
+				<ul>
+					<li>Motivation</li>
+					<li>Principles</li>
+					<li>Design your test</li>
+					<li>FizzBuzz Demo</li>
+					<li>Hands On</li>
+				</ul>
+			</section>
+
+			<section>
+				<section>
+					<h1>Today's Goals</h1>
+					<ul>
+						<li>Advantages and disadvantages of unit testing</li>
+						<li>Learn unit testing principles</li>
+						<li>Learn unit testing best practices</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Motivation</h1>
+				</section>
+
+				<section>
+					<h3>Short-term benefits</h3>
+					<ul>
+						<li>Helps to design your code</li>
+						<li>Explicitly describes method behavior</li>
+						<li>Fast feedback loop</li>
+						<li>Visualizes continous progress</li>
+						<li>Rewarding</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Long-term benefits</h3>
+					<ul>
+						<li>Explicit up-to-date documentation</li>
+						<li>Asserts correctness of implementation</li>
+						<li>Do not fear refactoring</li>
+						<li>Breaking code gives direct feedback</li>
+						<li>More trust on releasing the product</li>
+						<li>Commit with confidence</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Disadvantages</h3>
+					<ul>
+						<li>Time investment</li>
+						<li>Tests need to be maintained</li>
+						<li>Increases build time</li>
+						<li>Unit test path might be tricky</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+
+				<section>
+					<h1>Principles</h1>
+				</section>
+
+				<section>
+					<h3>The test world</h3>
+					<!-- Add unit level, component, integration... -->
+					<img height="450" width="450" data-src="images/testing_pyramid.jpg">
+
+					<aside class="notes">
+						* jksdhf * ksjdhf
+					</aside>
+				</section>
+
+				<section>
+					<table>
+						<tr>
+							<th>Test level</th>
+							<th>Scope</th>
+							<th>Example</th>
+						</tr>
+						<tr>
+							<td>Manual</td>
+							<td>Whole application</td>
+							<td>Penetration test</td>
+						</tr>
+						<tr>
+							<td>UI</td>
+							<td>UI behavior</td>
+							<td>Form validation</td>
+						</tr>
+						<tr>
+							<td>API</td>
+							<td>Public interfaces</td>
+							<td>Call web service</td>
+						</tr>
+						<tr>
+							<td>Integration</td>
+							<td>Component + external dependencies</td>
+							<td>Databases, files</td>
+						</tr>
+						<tr>
+							<td>Component</td>
+							<td>Unit + internal dependencies</td>
+							<td>Objects interaction</td>
+						</tr>
+						<tr>
+							<td>Unit</td>
+							<td>Smallest unit</td>
+							<td>Classes, functions</td>
+						</tr>
+					</table>
+				</section>
+
+				<section>
+					<h3>Costs</h3>
+					<img data-src="images/test-pyramid.png">
+				</section>
+
+				<section>
+					<h3>Unit test properties (FIRST)</h3>
+					<ul>
+						<li>
+							<b>F</b>ast</li>
+						<li>
+							<b>I</b>solated</li>
+						<li>
+							<b>R</b>epeatable</li>
+						<li>
+							<b>S</b>elf-verifying</li>
+						<li>
+							<b>T</b>imely</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Fast</h3>
+					<ul>
+						<li>Milliseconds</li>
+						<li>No IO, DB, web client...</li>
+						<li>No time consuming processing</li>
+						<li>You should never hesitate to execute unit tests</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Isolated</h3>
+					<ul>
+						<li>Only execute code in the unit under test</li>
+						<li>Mock external dependencies (Workshop #3)</li>
+						<li>Independent of tests order execution</li>
+						<li>Executing any test always produces the same result</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Repeatable</h3>
+					<ul>
+						<li>Deterministic result</li>
+						<li>Independent of environement (timezone, locale, line endings...)</li>
+						<li>Each test should setup/arrange it's own data</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Self-verifying</h3>
+					<ul>
+						<li>No manual check</li>
+						<li>Green or red</li>
+						<li>Direct feedback</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Timely</h3>
+					<ul>
+						<li>Test should be written during implementation</li>
+						<li>Workshop #2 | TDD</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Design your test</h1>
+				</section>
+
+				<section>
+					<h3>Best practices</h3>
+					<ul>
+						<li>Test class name should be named <code><b>[TestedClass]</b>Tests</code></li>
+						<li>Test method name should follow GivenWhenThen pattern</li>
+						<li>Test method should follow arrange-act-assert</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Arrange</h3>
+					<ul>
+						<li>Set up</li>
+						<li>Control on inputs - side effects</li>
+						<li>Should be small (if not: code smell/too much dependencies)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Act</h3>
+					<ul>
+						<li>Call the tested code</li>
+						<li>One liner</li>
+						<li>Keep call's result for assertion</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Assert</h3>
+					<ul>
+						<li>Assert a single logical outcome</li>
+						<li>One liner</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>FizzBuzz Demo</h1>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Hands On</h1>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Today you've learned</h1>
+					<ul>
+						<li>What are the unit test properties</li>
+						<li>How to write them</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Next workshop</h1>
+					<ul>
+						<li>Red green refactor</li>
+						<li>TDD is a tool</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Feedback</h1>
+					<ul>
+						<li>By hand rate from 0 to 5</li>
+						<li>Contact us directly or by mail for any feedback ;)</li>
+					</ul>
+				</section>
+			</section>
+
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
+</html>

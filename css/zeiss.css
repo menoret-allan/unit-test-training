@@ -1,0 +1,51 @@
+.header {
+    width:100%;
+    height:10%;
+    border-bottom: 1px solid #CCCCCC;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+
+.footer {
+    border-top: 1px solid #CCCCCC;
+    height: 10%;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+
+.header h1 {
+    height:100%;
+    line-height:100%;
+    margin-left:50px;
+    float: left;
+}
+
+.header img {
+    float: right;
+}
+
+.footer p {
+    margin: 10px;
+}
+
+.reveal {
+    border:none;
+    height:75% !important;
+}
+
+.section {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.reveal img {   
+    border: 1px solid #CCCCCC !important;
+}
+
+.half {
+    margin-top:0px;
+    width:49%;
+    display: inline-block;
+    vertical-align: middle !important;
+}
+
