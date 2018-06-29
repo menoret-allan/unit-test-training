@@ -116,7 +116,7 @@
 				</section>
 
 				<section>
-					<table>
+					<table style="font-size: 75%">
 						<tr>
 							<th>Test level</th>
 							<th>Scope</th>
@@ -155,8 +155,14 @@
 					</table>
 
 					<aside class="notes">
-						A unit test tests only <b>one</b> single unit - typically a class.
-						Each test case tests only <b>one</b> single use-case.
+						<ul>
+							<li> A unit is typically a class. </li>
+							<li>Each test case tests only
+								<b>one</b> single use-case - typically a method.</li>
+							<li>
+								Each test case has a fixed, known input and a fixed, known output
+							</li>
+						</ul>
 					</aside>
 				</section>
 
@@ -207,7 +213,7 @@
 						<li>Deterministic result</li>
 						<li>Independent of environement (timezone, locale, line endings...)</li>
 						<li>Each test should setup/arrange it's own data</li>
-						<li>Avoid flakiness as best as you can</li>
+						<li>Avoid flakiness at all cost</li>
 					</ul>
 				</section>
 
