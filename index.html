@@ -193,19 +193,28 @@
 				</section>
 
 				<section>
-					<h3>Unit test properties (FIRST)</h3>
-					<ul>
-						<li>
-							<b>F</b>ast</li>
-						<li>
-							<b>I</b>solated</li>
-						<li>
-							<b>R</b>epeatable</li>
-						<li>
-							<b>S</b>elf-verifying</li>
-						<li>
-							<b>T</b>imely</li>
-					</ul>
+					<h3>What's wrong?</h3>
+					<pre>
+						<code>
+var test = new HttpClient();
+
+var response = await test.GetAsync("http://www.whatever.com/microscopes");
+
+Assert.Equal(this.expectedHttpGetResult, await response.Content.ReadAsStringAsync());
+						</code>
+					</pre>
+					<pre>
+						<code>
+int highestValue = int.MinValue;
+
+for (var nb = 0; nb < int.MaxValue; nb++)
+{
+	highestValue = KeepHighestNumber(nb);
+}
+
+Assert.Equal(int.MaxValue - 1, highestValue);
+						</code>
+					</pre>
 				</section>
 
 				<section>
@@ -217,6 +226,22 @@
 						<li>You should never hesitate to execute unit tests</li>
 					</ul>
 				</section>
+
+				<section>
+					<h3>What's wrong?</h3>
+					<pre>
+						<code>
+// You need to run the Database to execute this test
+var microscopeRepository = new MicroscopeRepository("Data Source=(Loc...");
+var microscopeService = new MicroscopeService(microscopeRepository);
+					
+var result = await microscopeService.GetAsync(Guid.Parse("f64600b8-a919-4212-9e82-4075c06cfc3e"));
+					
+Assert.Equal("Axio Scan", result.Name);
+						</code>
+					</pre>
+				</section>
+	
 
 				<section>
 					<h3>Isolated</h3>
@@ -240,6 +265,28 @@
 				</section>
 
 				<section>
+					<h3>What's wrong?</h3>
+					<pre>
+						<code>
+var str = "my test is solala";
+
+var result = AddEndline(str);
+					
+Assert.Equal("my test is solala\r\n", result);
+						</code>
+					</pre>
+					<pre>
+						<code>
+var currentDate = DateTime.Now;
+
+var result = new Microscope();
+					
+Assert.Equal(currentDate, result.CreatedAt);
+						</code>
+					</pre>
+				</section>
+
+				<section>
 					<h3>Repeatable</h3>
 					<ul>
 						<li>Deterministic result</li>
@@ -249,9 +296,23 @@
 					</ul>
 					<aside class="notes">
 						<ul>
-							<li>independent of environment means e. g. in WPF test that the test must set the thread culture if it makes assumptions about it</li>
+							<li>independent of environment means e. g. in WPF test that the test must set the thread culture if it makes assumptions
+								about it</li>
 						</ul>
 					</aside>
+				</section>
+
+
+				<section>
+					<h3>What's wrong?</h3>
+					<pre>
+					<code>
+var microscopeService = new MicroscopeService();
+
+var commandResult = microscopeService.Command("proccess this command");
+await WriteFile(commandResult);
+						</code>
+					</pre>
 				</section>
 
 				<section>
@@ -281,6 +342,24 @@
 						</ul>
 					</aside>
 				</section>
+
+
+				<section>
+					<h3>Unit test properties (FIRST)</h3>
+					<ul>
+						<li>
+							<b>F</b>ast</li>
+						<li>
+							<b>I</b>solated</li>
+						<li>
+							<b>R</b>epeatable</li>
+						<li>
+							<b>S</b>elf-verifying</li>
+						<li>
+							<b>T</b>imely</li>
+					</ul>
+				</section>
+
 			</section>
 
 			<section>
@@ -335,6 +414,27 @@
 						<li>Assert a single logical outcome</li>
 						<li>One liner</li>
 					</ul>
+				</section>
+
+				<section>
+					<h3>Example</h3>
+					<pre>
+						<code>
+// ARRANGE
+var microscopeId = Guid.NewGuid();
+var repositoryMock = new Mock&lt;MicroscopeRepository&gt;();
+var microscopeName = "Sponge Bob";
+repositoryMock.Setup(repo => repo.GetAsync(microscopeId))
+              .ReturnsAsync(new Microscope { Name = microscopeName });
+var microscopeService = new MicroscopeService(repositoryMock.Object);
+
+// ACT
+var result = await microscopeService.GetAsync(microscopeId);
+
+// ASSERT
+Assert.Equal(microscopeName, result.Name);
+						</code>
+					</pre>
 				</section>
 			</section>
 
